@@ -4,7 +4,8 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-public class PostNotes {
+@Table(name = "post_notes")
+public class PostNote {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,11 +21,11 @@ public class PostNotes {
     private String createdBy;
 
     // Constructors, Getters, and Setters
-    public PostNotes() {
+    public PostNote() {
         this.createdAt = LocalDateTime.now(); // Set default value to current timestamp
     }
 
-    public PostNotes(String content, String createdBy) {
+    public PostNote(String content, String createdBy) {
         this.content = content;
         this.createdBy = createdBy;
         this.createdAt = LocalDateTime.now();

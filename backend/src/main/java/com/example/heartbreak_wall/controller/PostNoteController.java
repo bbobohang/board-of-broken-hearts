@@ -1,11 +1,10 @@
 package com.example.heartbreak_wall.controller;
 
-import com.example.heartbreak_wall.model.PostNotes;
+import com.example.heartbreak_wall.model.PostNote;
 import com.example.heartbreak_wall.service.PostNoteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,7 +16,18 @@ public class PostNoteController {
     private PostNoteService postNoteService;
 
     @GetMapping
-    public List<PostNotes> getAllPostNotes(){
+    public List<PostNote> getAllPostNotes(){
         return postNoteService.getAllPostNotes();
+    }
+
+    @PostMapping
+    public PostNote createPostNote(@RequestBody PostNote postNote) {
+        return postNoteService.createPostNote(postNote);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletePostNote(@PathVariable Long id) {
+        postNoteService.deletePostNote(id);
+        return ResponseEntity.ok("Post-note deleted successfully");
     }
 }
